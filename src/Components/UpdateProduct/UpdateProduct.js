@@ -30,10 +30,14 @@ function UpdateProduct(props) {
       .then((res) => {
         setLoading(false);
         setOne(res.data);
+        toast.success(
+          "Please click on the Update to fill Previous Values of the Product"
+        );
       })
       .catch((err) => {
         setLoading(false);
-        console.log("Error", err);
+        // console.log("Error", err);
+        toast.error(err.message);
       });
   };
 
@@ -46,24 +50,20 @@ function UpdateProduct(props) {
 
   const handleProductSubmit = (e) => {
     e.preventDefault();
-    // console.log(one);
-    // console.log(values);
     let slugpast = slugify(props.name);
+    setLoading(true);
     updateProduct(values, slugpast)
       .then((res) => {
-        // toast.success("Product is Created");
-        window.alert("Product is UPdated");
-        // console.log(res);
-        // to reload the page
+        toast.success("Product is Updated");
+        setLoading(false);
         window.location.reload();
       })
       .catch((err) => {
-        // toast.error("Product Create Failed");
-        toast.error(err.response.data.err);
-        // toast.error(err.response);
-        // console.log(err.response.data);
+        setLoading(false);
+        toast.error(err.message);
       });
   };
+
   const fillProduct = () => {
     console.log(one);
     setValues({
@@ -78,6 +78,7 @@ function UpdateProduct(props) {
       price: one.price,
     });
   };
+
   const handleChange = (e) => {
     // console.log(e.target);
     setValues({ ...values, [e.target.name]: e.target.value });

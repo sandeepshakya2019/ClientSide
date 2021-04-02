@@ -17,6 +17,7 @@ function Create() {
   };
   const [close, setClose] = useState(false);
   const [values, setValues] = useState(initialProduct);
+  const [loading, setLoading] = useState(false);
 
   if (close) {
     return <AllProduct />;
@@ -25,17 +26,17 @@ function Create() {
   const handleProductSubmit = (e) => {
     e.preventDefault();
     // console.log(values);
+    setLoading(true);
+
     createProduct(values)
       .then((res) => {
-        // toast.success("Product is Created");
-        window.alert("Product is Created");
-        console.log(res);
-        // to reload the page
+        toast.success("Product Created Success");
         window.location.reload();
       })
       .catch((err) => {
         // toast.error("Product Create Failed");
-        toast.error(err.response.data.err);
+        setLoading(false);
+        toast.error(err.message);
         // toast.error(err.response);
         // console.log(err.response.data);
       });

@@ -23,27 +23,27 @@ function AllProduct() {
       .then((res) => {
         setLoading(false);
         setProducts(res.data);
+        toast.success("Product Fetch Success");
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
+        // console.log(err.message);
+        toast.error(err.message);
       });
   };
   const handleRemove = async (slug) => {
     if (window.confirm("Delete ? ") === true) {
       setLoading(true);
-      // console.log(slug);
       remove(slug)
         .then((res) => {
           setLoading(false);
-          alert("Deleted");
+          // alert("Deleted");
           loadAllProducts();
-
-          // toast.success("Category Deleted");
+          toast.success("Product Deleted");
         })
         .catch((err) => {
           setLoading(false);
-          toast.error(err.response.data);
+          toast.error(err.message);
         });
     }
   };
@@ -68,11 +68,11 @@ function AllProduct() {
       <br />
       <center>{loading ? <h1>Loading ...</h1> : <h1>Products List</h1>}</center>
       <br />
-      <div className="create" onClick={(e) => setCreate(true)}>
+      <div className="create btn btn-dark" onClick={(e) => setCreate(true)}>
         Click to Create the Product
       </div>
       <br />
-
+      <br />
       {products.map((item) => (
         <div key={item._id} class="alert alert-primary" role="alert">
           <p>
