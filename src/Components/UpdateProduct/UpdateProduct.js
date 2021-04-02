@@ -47,11 +47,12 @@ function UpdateProduct(props) {
   const handleProductSubmit = (e) => {
     e.preventDefault();
     // console.log(one);
-    console.log(values);
-    updateProduct(values)
+    // console.log(values);
+    let slugpast = slugify(props.name);
+    updateProduct(values, slugpast)
       .then((res) => {
         // toast.success("Product is Created");
-        window.alert("Product is UPdates");
+        window.alert("Product is UPdated");
         // console.log(res);
         // to reload the page
         window.location.reload();
@@ -64,6 +65,7 @@ function UpdateProduct(props) {
       });
   };
   const fillProduct = () => {
+    console.log(one);
     setValues({
       title: one.title,
       description: one.description,
@@ -71,6 +73,7 @@ function UpdateProduct(props) {
       color: one.color,
       screensize: one.screensize,
       framerate: one.framerate,
+      operatingsystem: one.operatingsystem,
       quality: one.quality,
       price: one.price,
     });

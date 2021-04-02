@@ -8,8 +8,11 @@ export const listProduct = async (count) => {
   return await axios.get(process.env.REACT_APP_API + "/products/" + count);
 };
 
-export const updateProduct = async (product) => {
-  return await axios.put(process.env.REACT_APP_API + "/products/", product);
+export const updateProduct = async (product, slugpast) => {
+  return await axios.put(
+    process.env.REACT_APP_API + `/products/${slugpast}`,
+    product
+  );
 };
 
 export const getProductsCount = async () => {

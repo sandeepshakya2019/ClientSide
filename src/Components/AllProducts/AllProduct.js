@@ -36,8 +36,10 @@ function AllProduct() {
       remove(slug)
         .then((res) => {
           setLoading(false);
-          alert("Deletd");
-          toast.success("Category Deleted");
+          alert("Deleted");
+          loadAllProducts();
+
+          // toast.success("Category Deleted");
         })
         .catch((err) => {
           setLoading(false);
