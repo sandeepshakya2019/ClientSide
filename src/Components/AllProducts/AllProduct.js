@@ -4,9 +4,12 @@ import Products from "../Product/Products";
 import Create from "../CreateProduct/Create";
 import { listProduct, remove } from "../../Functions/product";
 import { toast } from "react-toastify";
+import UpdateProduct from "../UpdateProduct/UpdateProduct";
 
 function AllProduct() {
   const [open, setOpen] = useState(false);
+  const [slug, setSlug] = useState("");
+  const [updateRender, setUpdateRender] = useState(false);
   const [product, setProduct] = useState("");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -42,6 +45,10 @@ function AllProduct() {
         });
     }
   };
+  const handleUpdate = async (slug) => {
+    setUpdateRender(true);
+    setSlug(slug);
+  };
   // console.log(products);
   const [create, setCreate] = useState(false);
 
@@ -51,8 +58,11 @@ function AllProduct() {
   if (open) {
     return <Products name={product} />;
   }
+  if (updateRender) {
+    return <UpdateProduct name={slug} />;
+  }
   return (
-    <div className="container fluid">
+    <div className="container-fluid">
       <br />
       <center>{loading ? <h1>Loading ...</h1> : <h1>Products List</h1>}</center>
       <br />
@@ -82,7 +92,7 @@ function AllProduct() {
             </span>
             <span
               className="btn btn-sm float-right"
-              onClick={() => handleRemove(item.slug)}
+              onClick={() => handleUpdate(item.slug)}
             >
               <EditOutlined className="text-success" />
             </span>

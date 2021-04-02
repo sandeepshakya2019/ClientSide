@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AllProduct from "../AllProducts/AllProduct";
-import { createProduct } from "../../Functions/product";
+import { updateProduct } from "../../Functions/product";
 import { toast } from "react-toastify";
+import slugify from "react-slugify";
+import { read } from "../../Functions/product";
 
-function Create() {
+function UpdateProduct(props) {
   const initialProduct = {
     title: "",
     description: "",
@@ -16,20 +18,41 @@ function Create() {
     price: "",
   };
   const [close, setClose] = useState(false);
+  const [one, setOne] = useState("");
+  const [loading, setLoading] = useState(true);
   const [values, setValues] = useState(initialProduct);
 
-  if (close) {
-    return <AllProduct />;
-  }
+  const getProduct = () => {
+    // console.log(props.name);
+    let main = slugify(props.name);
+    setLoading(true);
+    read(main)
+      .then((res) => {
+        setLoading(false);
+        setOne(res.data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log("Error", err);
+      });
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+  // console.log(one);
+
+  //   fillProduct();
 
   const handleProductSubmit = (e) => {
     e.preventDefault();
-    // console.log(values);
-    createProduct(values)
+    // console.log(one);
+    console.log(values);
+    updateProduct(values)
       .then((res) => {
         // toast.success("Product is Created");
-        window.alert("Product is Created");
-        console.log(res);
+        window.alert("Product is UPdates");
+        // console.log(res);
         // to reload the page
         window.location.reload();
       })
@@ -40,14 +63,33 @@ function Create() {
         // console.log(err.response.data);
       });
   };
+  const fillProduct = () => {
+    setValues({
+      title: one.title,
+      description: one.description,
+      quantity: one.quantity,
+      color: one.color,
+      screensize: one.screensize,
+      framerate: one.framerate,
+      quality: one.quality,
+      price: one.price,
+    });
+  };
   const handleChange = (e) => {
-    console.log(e.target);
+    // console.log(e.target);
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
+  if (close) {
+    return <AllProduct />;
+  }
   return (
     <div className="container">
       <button className="btn btn-danger" onClick={(e) => setClose(true)}>
         Back
+      </button>
+      <button className="btn btn-success" onClick={fillProduct}>
+        Update
       </button>
       <form onSubmit={handleProductSubmit}>
         <div className="form-group">
@@ -192,4 +234,4 @@ function Create() {
   );
 }
 
-export default Create;
+export default UpdateProduct;
