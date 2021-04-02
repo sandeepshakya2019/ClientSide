@@ -95,7 +95,7 @@ function CreateProductV() {
     <>
       <div className="container-fluid">
         <center>
-          <h2>Create Product</h2>
+          {loading ? <h2> Loading Product ...</h2> : <h2>Create Product</h2>}
         </center>
         <button className="btn btn-danger" onClick={(e) => setClose(true)}>
           Back
@@ -114,30 +114,30 @@ function CreateProductV() {
               {product}
             </button>
             <div className="dropdown-menu">
-              <a
+              <span
                 className="dropdown-item"
                 value="mobile"
                 name="product"
                 onClick={handleProduct}
               >
                 Mobile
-              </a>
-              <a
+              </span>
+              <span
                 className="dropdown-item"
                 value="tv"
                 name="product"
                 onClick={handleProduct}
               >
                 Television (TV)
-              </a>
-              <a
+              </span>
+              <span
                 className="dropdown-item"
                 value="laptop"
                 name="product"
                 onClick={handleProduct}
               >
                 Laptops
-              </a>
+              </span>
             </div>
           </div>
         </div>

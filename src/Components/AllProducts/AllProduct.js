@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import Products from "../Product/Products";
+// import Products from "../Product/Products";
 import Create from "../CreateProduct/Create";
 import {
   listProduct,
@@ -15,10 +15,10 @@ import CreateProductV from "../CreateProduct/CreateProductV";
 import Productsv from "../Product/Productsv";
 
 function AllProduct() {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [slug, setSlug] = useState("");
   const [updateRender, setUpdateRender] = useState(false);
-  const [product, setProduct] = useState("");
+  // const [product, setProduct] = useState("");
   const [products, setProducts] = useState([]);
   const [laptop, setLaptop] = useState([]);
   const [tv, setTv] = useState([]);
@@ -111,9 +111,9 @@ function AllProduct() {
   if (createv) {
     return <CreateProductV />;
   }
-  if (open) {
-    return <Products name={product} />;
-  }
+  // if (open) {
+  //   return <Products name={product} />;
+  // }
   if (openv) {
     return <Productsv product={productv} title={titlev} />;
   }
@@ -235,7 +235,10 @@ function AllProduct() {
               <span
                 className="title"
                 onClick={(e) => {
-                  setProductv(item.title);
+                  console.log(item);
+                  setProductv(item.product);
+                  setTitlev(item.title);
+
                   setOpenv(true);
                 }}
                 style={{ cursor: "pointer" }}

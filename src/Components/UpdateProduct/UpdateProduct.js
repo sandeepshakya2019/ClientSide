@@ -93,7 +93,7 @@ function UpdateProduct(props) {
         Back
       </button>
       <button className="btn btn-success" onClick={fillProduct}>
-        Update
+        {loading ? "Loading ..." : "Update"}
       </button>
       <form onSubmit={handleProductSubmit}>
         <div className="form-group">

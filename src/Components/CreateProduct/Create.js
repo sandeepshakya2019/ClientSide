@@ -47,6 +47,9 @@ function Create() {
   };
   return (
     <div className="container">
+      <center>
+        {loading ? <h2>Loading ...</h2> : <h2>Create Product</h2>}
+      </center>
       <button className="btn btn-danger" onClick={(e) => setClose(true)}>
         Back
       </button>

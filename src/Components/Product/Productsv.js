@@ -7,7 +7,6 @@ function Productsv(props) {
       <h2>{props.title}</h2>
     </div>
   );
-  <h2>{props.product}</h2>;
 }
 
 export default Productsv;
