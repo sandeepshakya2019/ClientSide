@@ -12,6 +12,7 @@ import {
 import { toast } from "react-toastify";
 import UpdateProduct from "../UpdateProduct/UpdateProduct";
 import CreateProductV from "../CreateProduct/CreateProductV";
+import Productsv from "../Product/Productsv";
 
 function AllProduct() {
   const [open, setOpen] = useState(false);
@@ -27,6 +28,9 @@ function AllProduct() {
   const [create, setCreate] = useState(false);
   const [createv, setCreateV] = useState(false);
 
+  const [openv, setOpenv] = useState(false);
+  const [productv, setProductv] = useState("");
+  const [titlev, setTitlev] = useState("");
   useEffect(() => {
     loadAllProducts();
   }, []);
@@ -110,6 +114,9 @@ function AllProduct() {
   if (open) {
     return <Products name={product} />;
   }
+  if (openv) {
+    return <Productsv product={productv} title={titlev} />;
+  }
   if (updateRender) {
     return <UpdateProduct name={slug} />;
   }
@@ -163,8 +170,11 @@ function AllProduct() {
               <span
                 className="title"
                 onClick={(e) => {
-                  setProduct(item.title);
-                  setOpen(true);
+                  console.log(item);
+                  setProductv(item.product);
+                  setTitlev(item.title);
+
+                  setOpenv(true);
                 }}
                 style={{ cursor: "pointer" }}
               >
@@ -193,8 +203,10 @@ function AllProduct() {
               <span
                 className="title"
                 onClick={(e) => {
-                  setProduct(item.title);
-                  setOpen(true);
+                  setProductv(item.product);
+                  setTitlev(item.title);
+
+                  setOpenv(true);
                 }}
                 style={{ cursor: "pointer" }}
               >
@@ -223,8 +235,8 @@ function AllProduct() {
               <span
                 className="title"
                 onClick={(e) => {
-                  setProduct(item.title);
-                  setOpen(true);
+                  setProductv(item.title);
+                  setOpenv(true);
                 }}
                 style={{ cursor: "pointer" }}
               >

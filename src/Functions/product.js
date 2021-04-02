@@ -43,6 +43,13 @@ export const read = async (slug) => {
   return await axios.get(`${process.env.REACT_APP_API}/productget/${slug}`);
 };
 
+export const readv = async (slug, product) => {
+  return await axios.get(
+    `${process.env.REACT_APP_API}/productgetv/${slug}`,
+    product
+  );
+};
+
 export const remove = async (slug) => {
   return await axios.delete(process.env.REACT_APP_API + "/product/" + slug);
 };
