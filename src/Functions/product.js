@@ -4,8 +4,28 @@ export const createProduct = async (product) => {
   return await axios.post(process.env.REACT_APP_API + "/product", product);
 };
 
+export const createProductV = async (product) => {
+  return await axios.post(process.env.REACT_APP_API + "/productDef", product);
+};
+
 export const listProduct = async (count) => {
   return await axios.get(process.env.REACT_APP_API + "/products/" + count);
+};
+
+export const listProductTv = async (count) => {
+  return await axios.get(process.env.REACT_APP_API + "/productstv/" + count);
+};
+
+export const listProductLaptop = async (count) => {
+  return await axios.get(
+    process.env.REACT_APP_API + "/productslaptop/" + count
+  );
+};
+
+export const listProductMobile = async (count) => {
+  return await axios.get(
+    process.env.REACT_APP_API + "/productsmobile/" + count
+  );
 };
 
 export const updateProduct = async (product, slugpast) => {
